@@ -52,7 +52,7 @@ fn vs_main(in: VertexInput) -> VertexOutput {
 
 @fragment
 fn fs_main(in: VertexOutput, @builtin(front_facing) face: bool) -> @location(0) vec4f {
-    let light = vec3f(10.0, 0.0, 0.0); 
+    let light = vec3f(20.0, 0.0, 0.0); 
     let texture_sample = textureSample(text, sampl, in.uv);
     let normal_sample = textureSample(norm, sampl, in.uv);
     let local_normal = normal_sample.rgb * 2.0 - 1.0;
@@ -69,8 +69,8 @@ fn fs_main(in: VertexOutput, @builtin(front_facing) face: bool) -> @location(0) 
     
     let half_dir = normalize(normalize(in.view_direction) + normalize(light));
     let angle = max(0.0, dot(normal, half_dir));
-    let hardness = 32.0;
-    let specular = 0.4*vec4f(vec3f(pow(angle, hardness)), 1.0);
+    let hardness = 16.0;
+    let specular = 0.1*vec4f(vec3f(pow(angle, hardness)), 1.0);
     
     return diffuse + specular;
 }
